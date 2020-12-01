@@ -60,14 +60,14 @@ def evaluation(ga):
         A_list = []
         for j in range(len(genom_list_pop[i])):
             A_list.append(all_students[genom_list_pop[i][j]][0]*(1+all_students[genom_list_pop[i][j]][6]/100))
-        score += max(A_list)
+        score += round(max(A_list), 2)
         genom_list_pop[i].pop(A_list.index(max(A_list)))
     # B の選定
     for i in range(len(genom_list_pop)):
         B_list = []
         for j in range(len(genom_list_pop[i])):
             B_list.append(all_students[genom_list_pop[i][j]][1]*(1+all_students[genom_list_pop[i][j]][6]/100))
-        score += max(B_list)
+        score += round(max(B_list), 2)
         genom_list_pop[i].pop(B_list.index(max(B_list)))
     if genom_list_pop[i] == []:
         return score
@@ -76,7 +76,7 @@ def evaluation(ga):
         C_list = []
         for j in range(len(genom_list_pop[i])):
             C_list.append(all_students[genom_list_pop[i][j]][1]*(1+all_students[genom_list_pop[i][j]][6]/100))
-        score += max(C_list)
+        score += round(max(C_list), 2)
         genom_list_pop[i].pop(C_list.index(max(C_list)))
     if genom_list_pop[i] == []:
         return score
@@ -85,7 +85,7 @@ def evaluation(ga):
         D_list = []
         for j in range(len(genom_list_pop[i])):
             D_list.append(all_students[genom_list_pop[i][j]][1]*(1+all_students[genom_list_pop[i][j]][6]/100))
-        score += max(D_list)
+        score += round(max(D_list), 2)
         genom_list_pop[i].pop(D_list.index(max(D_list)))
     if genom_list_pop[i] == []:
         return score
@@ -94,7 +94,7 @@ def evaluation(ga):
         E_list = []
         for j in range(len(genom_list_pop[i])):
             E_list.append(all_students[genom_list_pop[i][j]][1]*(1+all_students[genom_list_pop[i][j]][6]/100))
-        score += max(E_list)
+        score += round(max(E_list), 2)
         genom_list_pop[i].pop(E_list.index(max(E_list)))
     if genom_list_pop[i] == []:
         return score
@@ -172,9 +172,9 @@ if __name__ == '__main__':
         fits = [i.getEvaluation() for i in current_generation_individual_group]
 
         # 進化結果を評価します
-        min_ = min(fits)
-        max_ = max(fits)
-        avg_ = sum(fits) / len(fits)
+        min_ = round(min(fits), 2)
+        max_ = round(max(fits), 2)
+        avg_ = round(sum(fits) / len(fits), 2)
 
         # 現行世代の進化結果を出力します
         print("-----第{}世代の結果-----".format(count_))
@@ -189,4 +189,4 @@ if __name__ == '__main__':
 
     # 最終結果出力
     print("最も優れた個体は{}".format(elite_genes[0].getGenom()))
-    print("評価は{}".format(elite_genes[0].getEvaluation()))
+    print("評価は{}".format(round(elite_genes[0].getEvaluation(), 2)))
