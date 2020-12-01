@@ -1,0 +1,19 @@
+version: '2'
+services:
+  python:
+    build: ./DockerFolder/python
+    image: neo4j-docker-python/python
+    volumes:
+      - ./python_query:/python_query
+    tty: true
+
+  neo4j:
+    build: ./DockerFolder/neo4j
+    image: neo4j-docker-python/neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./data/testdata:/var/lib/neo4j/import
+      - ${HOME}/neo4j/data:/data
+    tty: true

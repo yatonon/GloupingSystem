@@ -1,0 +1,17 @@
+LOAD CSV FROM "file:///items.csv" AS line
+CREATE(:Items{ items_id: line[1], name: line[2], shop: line[3], type: line[4]})
+
+2020/07/08
+LOAD CSV WITH HEADERS FROM 'file:///student.csv' AS line
+CREATE (:Student { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F)})
+データコピー
+docker cp コンテナID:/var/lib/neo4j/data data
+docker cp data　コンテナID:/var/lib/neo4j/data
+
+2020/11/03
+G を追加
+MATCH (n)
+DETACH DELETE n
+
+LOAD CSV WITH HEADERS FROM 'file:///student.csv' AS line
+CREATE (:Student { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
