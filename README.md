@@ -26,15 +26,21 @@ docker run -itd --publish=7474:7474 --publish=7687:7687 \
  -v ${HOME}/neo4j/data:/data neo4j_test_python
 
 username neo4j
-password neo4j(aaaaaaaa)
+password neo4j(neo4jpw)
+
+# 実際のコマンド
 
 docker-compose 作成
 docker-compose up
+
+python のコンテナに入る
+docker exec -it neo4j-docker-python_python_1 bash
+
 python のコンテナで
 pip install neo4j
 
 memo
 curl http://localhost:7474
 が
-curl http://neo4j:7474（こっちだと外部からアクセス可）
+curl http://neo4j:7474（こっちだと同じ compose 内の外部コンテナからアクセス可）
 と一緒になる

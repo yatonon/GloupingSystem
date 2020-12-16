@@ -1,5 +1,0 @@
-order_id:ID,user_id,shop_id,category_id,price,item_id,:LABEL
-order1,user1,shop1,cate1,9500,item1,order
-order2,user2,shop1,cate1,9500,item1,order
-order3,user3,shop1,cate1,1200,item2,order
-order4,user4,shop2,cate2,15000,item3,order

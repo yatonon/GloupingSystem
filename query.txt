@@ -13,5 +13,14 @@ G を追加
 MATCH (n)
 DETACH DELETE n
 
-LOAD CSV WITH HEADERS FROM 'file:///student.csv' AS line
+LOAD CSV WITH HEADERS FROM 'file:///2020_11pre_student.csv' AS line
 CREATE (:Student { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+2020/12/03
+node 数 20 個の csv を課題解決型として再度インストール
+
+MATCH (n)
+DETACH DELETE n
+
+LOAD CSV WITH HEADERS FROM 'file:///2020_12_student.csv' AS line
+CREATE (:Student20_problem_solving { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})

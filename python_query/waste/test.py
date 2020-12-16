@@ -14,7 +14,6 @@ result = session.run("MATCH (student:Student) RETURN student")
 for record in result:
     AllRecord.append(record.data()["student"])
 
-# メソッド一覧表示
 # for x in inspect.getmembers(AllRecord[0], inspect.ismethod):
 #   print(x[0])
 
