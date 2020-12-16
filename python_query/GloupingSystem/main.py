@@ -3,6 +3,7 @@ import random
 import copy
 
 import GenomClass.GeneticAlgorithm as ga
+from AccessDatabase.student import get_student
 from Methods.create import create_genom
 from Methods.select import select, next_generation_gene_create
 from Methods.mutation import mutation
@@ -19,28 +20,7 @@ GENOM_MUTATION = 0.1
 # 繰り返す世代数
 MAX_GENERATION = 10
 
-all_students = {
-    "student1": [53, 63, 65, 63, 94, 42, 58],
-    "student2": [13, 53, 69, 24, 42, 19, 48],
-    "student3": [40, 7, 10, 82, 64, 86, 2],
-    "student4": [51, 19, 36, 75, 92, 92, 14],
-    "student5": [73, 82, 22, 29, 72, 74, 77],
-    "student6": [73, 82, 22, 29, 72, 74, 77],
-    "student7": [43, 23, 76, 98, 44, 21, 78],
-    "student8": [65, 22, 14, 35, 63, 43, 48],
-    "student9": [40, 7, 10, 82, 64, 25, 21],
-    "student10": [51, 19, 36, 75, 92, 92, 53],
-    "student11": [73, 78, 54, 24, 72, 35, 45],
-    "student12": [55, 25, 22, 78, 63, 40, 64],
-    "student13": [36, 64, 63, 63, 24, 60, 24],
-    "student14": [63, 26, 88, 26, 34, 64, 22],
-    "student15": [58, 34, 11, 44, 72, 23, 74],
-    "student16": [85, 25, 56, 33, 6, 5, 45],
-    "student17": [53, 86, 86, 77, 64, 2, 88],
-    "student18": [24, 27, 35, 46, 2, 45, 95],
-    "student19": [34, 35, 97, 58, 35, 45, 59],
-    "student20": [86, 76, 24, 98, 75, 63, 85],
-}
+all_students = get_student()
 
 if __name__ == '__main__':
 
