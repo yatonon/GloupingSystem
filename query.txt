@@ -24,3 +24,11 @@ DETACH DELETE n
 
 LOAD CSV WITH HEADERS FROM 'file:///2020_12_student.csv' AS line
 CREATE (:Student20_problem_solving { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+2020/12/29
+LOAD CSV WITH HEADERS FROM 'file:///ディスカッション.csv' AS line
+CREATE (:Student20_discussion { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+
+LOAD CSV WITH HEADERS FROM 'file:///ディベート.csv' AS line
+CREATE (:Student20_debate { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})

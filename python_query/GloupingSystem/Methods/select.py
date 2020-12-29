@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
 
-import GenomClass.GeneticAlgorithm as ga
-
 def select(ga, elite):
     # 現行世代個体集団の評価を高い順番にソートする
     sort_result = sorted(ga, reverse=True, key=lambda u: u.evaluation)

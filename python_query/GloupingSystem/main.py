@@ -2,7 +2,6 @@
 import random
 import copy
 
-import GenomClass.GeneticAlgorithm as ga
 from AccessDatabase.student import get_student
 from Methods.create import create_genom
 from Methods.select import select, next_generation_gene_create

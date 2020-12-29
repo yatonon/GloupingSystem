@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import random
-import GenomClass.GeneticAlgorithm as ga
 
 def mutation(ga, genom_mutation, team_people, all_students_len):
     ga_list = []

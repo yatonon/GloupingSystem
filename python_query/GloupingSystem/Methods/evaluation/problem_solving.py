@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
 
-import GenomClass.GeneticAlgorithm as ga
-
 def evaluation(ga, all_students):
     # ゲノムの評価
     score = 0
