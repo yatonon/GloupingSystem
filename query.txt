@@ -32,3 +32,20 @@ CREATE (:Student20_discussion { name: line.StudentID, year: toInteger(line.Age),
 
 LOAD CSV WITH HEADERS FROM 'file:///ディベート.csv' AS line
 CREATE (:Student20_debate { name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+2021/01/07
+LOAD CSV WITH HEADERS FROM 'file:///student60.csv' AS line
+CREATE (:Student60{ name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+LOAD CSV WITH HEADERS FROM 'file:///student60.csv' AS line
+CREATE (:Student60{id: toInteger(line.id), name: line.StudentID, year: toInteger(line.Age), gender: line.Gender, A: toInteger(line.A), B: toInteger(line.B), C: toInteger(line.C), D: toInteger(line.D), E: toInteger(line.E), F: toInteger(line.F), G: toInteger(line.G)})
+
+LOAD CSV WITH HEADERS FROM 'file:///role.csv' AS line
+MATCH (start_student:Student60 {id: toInteger(line.START_ID)}),(end_student:Student60 {id: toInteger(line.END_ID)})
+CREATE (start_student)-[:THINKED {role: line.role}]->(end_student)
+
+MATCH p=()-[r:THINKED]->() delete p
+
+LOAD CSV WITH HEADERS FROM 'file:///role2.csv' AS line
+MATCH (start_student:Student60 {id: toInteger(line.START_ID)}),(end_student:Student60 {id: toInteger(line.END_ID)})
+CREATE (start_student)-[:THINKED {role: line.role}]->(end_student)

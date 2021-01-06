@@ -1,31 +1,41 @@
 # pip install neo4j
 from neo4j import GraphDatabase, basic_auth
 
-def get_student():
-    AllRecord = []
+class GetStudentData:
 
-    driver = GraphDatabase.driver("bolt://neo4j", auth=basic_auth("neo4j", "neo4jpw"))
-    session = driver.session()
+    def __init__(self):
+        # インストラクタ
+        driver = GraphDatabase.driver("bolt://neo4j", auth=basic_auth("neo4j", "neo4jpw"))
+        self.session = driver.session()
 
-    result = session.run("MATCH (student:Student20_problem_solving) RETURN student")
+    def get_student(self):
+        ScoreRecord = {}
+        result = self.session.run("MATCH (student:Student60) RETURN student")
+        for record in result:
+            add_list = [
+                record.data()["student"]["A"],
+                record.data()["student"]["B"],
+                record.data()["student"]["C"],
+                record.data()["student"]["D"],
+                record.data()["student"]["E"],
+                record.data()["student"]["F"],
+                record.data()["student"]["G"],
+                ]
+            ScoreRecord[record.data()["student"]["name"]] = {"node_id": record.values()[0].id,"property": add_list}
 
-    for record in result:
-        AllRecord.append(record.data()["student"])
+        return ScoreRecord
 
-    ScoreRecord = {}
+    def get_student_node(self):
+        NodeRecord = []
+        result = self.session.run("MATCH ()-[node:THINKED]->() RETURN node")
+        for record in result:
+            relationship = {}
+            for r in record.values()[0].values():
+                relationship = {"role": r}
+            NodeRecord.append([record.values()[0].start_node.id, relationship["role"], record.values()[0].end_node.id])
 
-    for record in AllRecord:
-        add_list = [
-            record["A"],
-            record["B"],
-            record["C"],
-            record["D"],
-            record["E"],
-            record["F"],
-            record["G"],
-            ]
-        ScoreRecord[record["name"]] = add_list
+        return NodeRecord
 
-    session.close()
-
-    return ScoreRecord
+    def __del__(self):
+        # デスストラクタ
+        self.session.close()

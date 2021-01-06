@@ -2,7 +2,7 @@
 import random
 import copy
 
-from AccessDatabase.student import get_student
+import AccessDatabase.student as ADstudent
 from Methods.create import create_genom
 from Methods.select import select, next_generation_gene_create
 from Methods.mutation import mutation
@@ -18,8 +18,9 @@ SELECT_GENOM = 30
 GENOM_MUTATION = 0.1
 # 繰り返す世代数
 MAX_GENERATION = 10
-
-all_students = get_student()
+GetStudentDataInstance = ADstudent.GetStudentData()
+all_students = GetStudentDataInstance.get_student()
+all_student_nodes = GetStudentDataInstance.get_student_node()
 
 if __name__ == '__main__':
 
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     for count_ in range(1, MAX_GENERATION + 1):
         # 現行世代個体集団の遺伝子を評価し、genomClassに代入します
         for i in range(MAX_GENOM_LIST):
-            evaluation_result = evaluation(current_generation_individual_group[i], all_students)
+            evaluation_result = evaluation(current_generation_individual_group[i], all_students, all_student_nodes)
             current_generation_individual_group[i].setEvaluation(evaluation_result)
         # エリート個体を選択します
         elite_genes = select(current_generation_individual_group, SELECT_GENOM)
