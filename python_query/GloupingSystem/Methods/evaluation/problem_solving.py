@@ -17,9 +17,8 @@ def evaluation(ga, all_students, all_student_nodes):
         for node in group_list:
             node_list.append(node["node_id"])
         genom_list_node_ids.append(node_list)
-    print("genom_list_pop")
-    print(genom_list_pop)
 
+    # 超汚い、本来グループごとに算定していくべき
     # A の選定
     for i in range(len(genom_list_pop)):
         A_list = []
@@ -55,5 +54,16 @@ def evaluation(ga, all_students, all_student_nodes):
             E_list.append(all_students[genom_list_pop[i][j]]["property"][4]*(1+all_students[genom_list_pop[i][j]]["property"][6]/100))
         score += round(max(E_list), 2)
         genom_list_pop[i].pop(E_list.index(max(E_list)))
+
+    # リレーションペナルティ
+    for node_id_list in genom_list_node_ids:
+        for relation_node in all_student_nodes:
+            if all(map(node_id_list.__contains__, (relation_node[0], relation_node[2]))):
+                if relation_node == "like":
+                    score += 50
+                elif relation_node == "respect":
+                    score += 100
+                elif relation_node == "hate":
+                    score -= 500
 
     return score
