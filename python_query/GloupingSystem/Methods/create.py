@@ -4,11 +4,11 @@ import copy
 
 import GenomClass.GeneticAlgorithm as ga
 
-def create_genom(student_name_list, team_people, all_students_len):
+def create_genom(all_students, team_people):
     # ゲノムの作成
-    random_play_time = int(all_students_len/team_people)
+    random_play_time = int(len(all_students)/team_people)
     genome_list = [[] for i in range(random_play_time)]
-    pop_list = copy.copy(student_name_list)
+    pop_list = list(copy.copy(all_students))
     for team_numver in range(random_play_time):
         for j in range(team_people):
             genome_list[team_numver].append(pop_list.pop(random.randrange(len(pop_list))))

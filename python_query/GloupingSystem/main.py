@@ -26,10 +26,9 @@ if __name__ == '__main__':
 
     # 一番最初の現行世代個体集団を生成します。
     current_generation_individual_group = []
-    all_students_name_list = list(all_students.keys())
     for i in range(MAX_GENOM_LIST):
         # 初期ゲノムの作成
-        current_generation_individual_group.append(create_genom(all_students_name_list, TEAM_PEOPLE, len(all_students)))
+        current_generation_individual_group.append(create_genom(all_students, TEAM_PEOPLE))
 
     for count_ in range(1, MAX_GENERATION + 1):
         # 現行世代個体集団の遺伝子を評価し、genomClassに代入します

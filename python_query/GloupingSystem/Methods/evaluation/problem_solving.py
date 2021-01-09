@@ -6,6 +6,19 @@ def evaluation(ga, all_students, all_student_nodes):
     score = 0
     genom_list = ga.getGenom()
     genom_list_pop = list(map(copy.copy, genom_list))
+    genom_list_data = []
+    genom_list_node_ids = []
+    def get_student_node_data(student_name):
+        return all_students[student_name]
+    for genom in genom_list:
+        genom_list_data.append(list(map(get_student_node_data, genom)))
+    for group_list in genom_list_data:
+        node_list = []
+        for node in group_list:
+            node_list.append(node["node_id"])
+        genom_list_node_ids.append(node_list)
+    print("genom_list_pop")
+    print(genom_list_pop)
 
     # A の選定
     for i in range(len(genom_list_pop)):
