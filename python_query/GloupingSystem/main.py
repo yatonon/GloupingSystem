@@ -17,7 +17,7 @@ SELECT_GENOM = 30
 # 遺伝子突然変異確率
 GENOM_MUTATION = 0.1
 # 繰り返す世代数
-MAX_GENERATION = 10
+MAX_GENERATION = 100
 GetStudentDataInstance = ADstudent.GetStudentData()
 all_students = GetStudentDataInstance.get_student()
 all_student_nodes = GetStudentDataInstance.get_student_node()
