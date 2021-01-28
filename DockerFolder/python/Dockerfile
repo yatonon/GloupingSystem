@@ -14,3 +14,5 @@ RUN apt-get install -y vim less
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 RUN pip install neo4j
+RUN pip install numpy
+RUN pip install matplotlib
