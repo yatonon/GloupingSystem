@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
 import copy
+import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,9 +10,11 @@ import AccessDatabase.student as ADstudent
 from Methods.create import create_genom
 from Methods.select import select, next_generation_gene_create
 from Methods.mutation import mutation
-from Methods.evaluation.problem_solving import evaluation
+from Methods.evaluation.problem_solving import evaluation as evaluation_problem_solving
+from Methods.evaluation.debate import evaluation as evaluation_debate
 
 # グループの人数 2人以上
+# dabate の場合は片方の人数となる
 TEAM_PEOPLE = 5
 # 遺伝子集団の大きさ
 MAX_GENOM_LIST = 100
@@ -21,8 +24,10 @@ SELECT_GENOM = 30
 GENOM_MUTATION = 0.1
 # 繰り返す世代数
 MAX_GENERATION = 100
+# 型の選択, 課題解決型なら 1,  ディベートなら 2, ディスカッションなら 3
+EVALUATION_TYPE = 2
 # pdf でデータのプロットをするか
-PDF_PLOT = True
+PDF_PLOT = False
 
 GetStudentDataInstance = ADstudent.GetStudentData()
 all_students = GetStudentDataInstance.get_student()
@@ -44,7 +49,11 @@ if __name__ == '__main__':
         graph_left_list.append(count_)
         # 現行世代個体集団の遺伝子を評価し、genomClassに代入します
         for i in range(MAX_GENOM_LIST):
-            evaluation_result = evaluation(current_generation_individual_group[i], all_students, all_student_nodes)
+            if EVALUATION_TYPE == 1:
+                evaluation_result = evaluation_problem_solving(current_generation_individual_group[i], all_students, all_student_nodes, MAX_GENERATION==count_, MAX_GENOM_LIST==i+1)
+            elif EVALUATION_TYPE == 2:
+                evaluation_result = evaluation_debate(current_generation_individual_group[i], all_students, all_student_nodes, MAX_GENERATION==count_, MAX_GENOM_LIST==i+1)
+
             current_generation_individual_group[i].setEvaluation(evaluation_result)
         # エリート個体を選択します
         elite_genes = select(current_generation_individual_group, SELECT_GENOM)
@@ -90,7 +99,9 @@ if __name__ == '__main__':
         plt.plot(graph_left, graph_height_min)
         plt.plot(graph_left, graph_height_avg, color="yellow")
         plt.plot(graph_left, graph_height_max, color="red")
-        plt.savefig("plot.pdf")
+        DIFF_JST_FROM_UTC = 9
+        dt_now = datetime.datetime.utcnow() + datetime.timedelta(hours=DIFF_JST_FROM_UTC)
+        plt.savefig("../plot_data/" + str(EVALUATION_TYPE) + "_" + dt_now.strftime('%Y-%m-%d_%H:%M:%S') + ".pdf")
 
     # 最終結果出力
     print("最も優れた個体は{}".format(elite_genes[0].getGenom()))
