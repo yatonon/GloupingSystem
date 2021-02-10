@@ -12,6 +12,7 @@ from Methods.select import select, next_generation_gene_create
 from Methods.mutation import mutation
 from Methods.evaluation.problem_solving import evaluation as evaluation_problem_solving
 from Methods.evaluation.debate import evaluation as evaluation_debate
+from Methods.evaluation.discussion import evaluation as evaluation_discussion
 
 # グループの人数 2人以上
 # dabate の場合は片方の人数となる
@@ -21,11 +22,11 @@ MAX_GENOM_LIST = 100
 # 遺伝子選択数
 SELECT_GENOM = 30
 # 遺伝子突然変異確率
-GENOM_MUTATION = 0.1
+GENOM_MUTATION = 0.3
 # 繰り返す世代数
 MAX_GENERATION = 100
 # 型の選択, 課題解決型なら 1,  ディベートなら 2, ディスカッションなら 3
-EVALUATION_TYPE = 2
+EVALUATION_TYPE = 3
 # pdf でデータのプロットをするか
 PDF_PLOT = False
 
@@ -53,6 +54,8 @@ if __name__ == '__main__':
                 evaluation_result = evaluation_problem_solving(current_generation_individual_group[i], all_students, all_student_nodes, MAX_GENERATION==count_, MAX_GENOM_LIST==i+1)
             elif EVALUATION_TYPE == 2:
                 evaluation_result = evaluation_debate(current_generation_individual_group[i], all_students, all_student_nodes, MAX_GENERATION==count_, MAX_GENOM_LIST==i+1)
+            elif EVALUATION_TYPE == 3:
+                evaluation_result = evaluation_discussion(current_generation_individual_group[i], all_students, all_student_nodes, MAX_GENERATION==count_, MAX_GENOM_LIST==i+1)
 
             current_generation_individual_group[i].setEvaluation(evaluation_result)
         # エリート個体を選択します
